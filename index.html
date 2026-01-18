@@ -4,96 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abinesh R L | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --indigo: #3F51B5;
-            --indigo-light: #5C6BC0;
             --saffron: #FF9933;
             --dark: #1a1a2e;
-            --light-bg: #f8f9fa;
+            --light-grey: #f4f7f9;
         }
 
         * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--light-bg); color: #333; line-height: 1.6; }
+        body { 
+            margin: 0; 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--light-grey); 
+            color: #2c3e50;
+        }
+
+        h1, h2, h3, .fancy-text { font-family: 'EB Garamond', serif; }
 
         /* Navigation */
-        .nav { background: rgba(26, 26, 46, 0.95); padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
-        .nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
-        .nav a:hover { color: var(--saffron); }
+        .nav { background: rgba(26, 26, 46, 0.98); padding: 20px; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .nav a { color: white; margin: 0 20px; text-decoration: none; font-weight: 400; font-size: 1.1rem; }
 
-        /* Hero Section */
+        /* Hero Section - Big Profile Pic & Fancy Styles */
         .hero { 
-            background: linear-gradient(135deg, var(--indigo) 0%, #283593 100%);
-            color: white; 
-            padding: 100px 20px; 
-            text-align: center;
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+            background: linear-gradient(rgba(63, 81, 181, 0.9), rgba(26, 26, 46, 0.95)), 
+                        url('https://www.transparenttextures.com/patterns/cubes.png');
+            color: white; padding: 100px 20px; text-align: center; 
         }
         .profile-img {
-            width: 180px;
-            height: 180px;
+            width: 250px; /* Big Profile Pic */
+            height: 250px;
             border-radius: 50%;
-            border: 5px solid var(--saffron);
-            margin-bottom: 20px;
+            border: 8px solid var(--saffron);
             object-fit: cover;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            margin-bottom: 25px;
+            transition: transform 0.5s ease;
         }
+        .profile-img:hover { transform: scale(1.05) rotate(2deg); }
+        .hero h1 { font-size: 4.5rem; margin: 0; font-weight: 800; letter-spacing: -1px; }
+        .hero p { font-size: 1.4rem; font-style: italic; font-family: 'EB Garamond', serif; }
 
-        section { padding: 80px 10%; }
-        h2 { 
-            font-size: 2rem; 
-            color: var(--indigo); 
-            border-bottom: 3px solid var(--saffron); 
-            display: inline-block; 
-            margin-bottom: 30px; 
+        /* About Section - Aligned Paragraphs */
+        section { padding: 100px 15%; }
+        .about-content { 
+            font-size: 1.25rem; 
+            line-height: 1.8; 
+            text-align: justify; 
+            color: #444; 
+            max-width: 900px; 
+            margin: auto;
         }
+        .about-content p { margin-bottom: 25px; }
 
-        /* Experience & Education Cards */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .card { 
-            background: white; 
-            padding: 25px; 
-            border-radius: 12px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
-            transition: transform 0.3s ease;
-            border-bottom: 4px solid transparent;
+        /* Playcards Slider (Linear Chain) */
+        .slider-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 30px;
+            padding: 40px 10px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
         }
-        .card:hover { transform: translateY(-10px); border-bottom: 4px solid var(--saffron); }
-        .card img { max-height: 60px; margin-bottom: 15px; }
+        .slider-container::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome */
 
-        /* Education Specific */
-        .edu-item { border-left: 3px solid var(--indigo); padding-left: 20px; margin-bottom: 20px; position: relative; }
-        .edu-item::before { 
-            content: ''; position: absolute; left: -9px; top: 0; 
-            width: 15px; height: 15px; background: var(--saffron); border-radius: 50%; 
-        }
-
-        /* Social Embeds */
-        .social-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-        .embed-box { flex: 1; min-width: 320px; background: #fff; border-radius: 12px; padding: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-
-        .btn { 
-            background: var(--saffron); color: white; padding: 12px 25px; 
-            border: none; border-radius: 50px; cursor: pointer; 
-            text-decoration: none; font-weight: bold; transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 153, 51, 0.4);
-        }
-        .btn:hover { background: #e68a2e; transform: scale(1.05); }
-
-        footer { background: var(--dark); color: white; text-align: center; padding: 40px; margin-top: 50px; }
-        
-        /* Language Tags */
-        .lang-badge {
-            display: inline-block;
-            background: #e8eaf6;
-            color: var(--indigo);
-            padding: 5px 12px;
+        .playcard {
+            flex: 0 0 350px;
+            height: 450px;
+            background-size: cover;
+            background-position: center;
             border-radius: 20px;
-            margin: 5px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            position: relative;
+            scroll-snap-align: start;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
         }
+        .playcard:active { transform: scale(0.95); } /* Touch sense effect */
+
+        .playcard-overlay {
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 30px;
+            color: white;
+        }
+        .logo-icon {
+            width: 70px; height: 70px;
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            position: absolute;
+            top: 20px; left: 20px;
+            object-fit: contain;
+        }
+        .playcard h3 { font-size: 1.8rem; margin: 0; color: var(--saffron); }
+        .playcard ul { font-size: 0.95rem; padding-left: 20px; opacity: 0.9; }
+
+        /* Footer */
+        footer { background: var(--dark); color: white; text-align: center; padding: 50px; font-family: 'EB Garamond', serif; font-size: 1.2rem; }
+        .btn { background: var(--saffron); color: white; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255,153,51,0.3); }
+
     </style>
 </head>
 <body>
@@ -102,86 +119,101 @@
     <a href="#about">About</a>
     <a href="#experience">Experience</a>
     <a href="#education">Education</a>
-    <a href="#social">Updates</a>
     <a href="#contact">Contact</a>
 </div>
 
 <header class="hero">
     <img src="https://media.licdn.com/dms/image/v2/D5603AQEsdvpKr9lAAQ/profile-displayphoto-scale_200_200/B56ZliTaXbG4AY-/0/1758290881694?e=1770249600&v=beta&t=Z4KQIP3O6Gg-6w7q8rpmWcXSRpcWzm4llbEwgo3ZJOE" alt="Abinesh R L" class="profile-img">
     <h1>Abinesh R L</h1>
-    <p style="max-width: 700px; margin: 10px auto; font-size: 1.1rem; opacity: 0.9;">
-        Biomedical Engineer | Public Policy & Political Consultant | Aspiring Bureaucrat | Environmentalist
-    </p>
+    <p>Biomedical Engineer | Public Policy & Political Consultant | Aspiring Bureaucrat | Environmentalist</p>
     <br>
     <a href="https://www.linkedin.com/in/abinesh-r-l-64a2881a2/" class="btn" target="_blank">Connect on LinkedIn</a>
 </header>
 
 <section id="about">
-    <h2>About Me</h2>
-    <p style="font-size: 1.1rem; color: #555;">
-        I’m an ambitious UPSC aspirant, who was earlier working in the corporate world - not out of choice, but to earn my daily bread while I chase a dream larger than myself.
+    <h2 style="font-size: 3rem; text-align: center;">About Me</h2>
+    <div class="about-content">
+        <p>I’m an ambitious UPSC aspirant, who was earlier working in the corporate world - not out of choice, but to earn my daily bread while I chase a dream larger than myself.</p>
         
-        Now I'm transitioning towards a role which involves, supporting politicians and public representatives across the nation in their daily Legislative, Electoral and Constituency related responsibilities.
+        <p>Now I'm transitioning towards a role which involves, supporting politicians and public representatives across the nation in their daily Legislative, Electoral and Constituency related responsibilities.</p>
         
-        With a Bachelor’s in Biomedical Engineering and interests in policy making, agronomy, sustainable urban and rural development, social justice, gender equality, and white-collar crimes.
+        <p>With a Bachelor’s in Biomedical Engineering and interests in policy making, agronomy, sustainable urban and rural development, social justice, gender equality, and white-collar crimes.</p>
         
-        I want to understand India inside out - from its people's mind to the parliament, from its struggles to its spirit - not with noise, but with compassion, humanity, leadership, and grit.
+        <p>I want to understand India inside out - from its people's mind to the parliament, from its struggles to its spirit - not with noise, but with compassion, humanity, leadership, and grit.</p>
         
-        I love the Thamizh language and Bharat's culture and I have a vision to Make Bharat Great Again!
+        <p>I love the Thamizh language and Bharat's culture and I have a vision to Make Bharat Great Again!</p>
 
-        If the path of civil services opens for me, I’ll serve the people with all I have. If not, I’ll do the same with what I have.
+        <p>If the path of civil services opens for me, I’ll serve the people with all I have. If not, I’ll do the same with what I have.</p>
 
-        At the core of it all - I’m just someone in search of my karma, a good responsible citizen of this wonderful country and every day, a better human.</p>
-    <p><i>"வாழ்க தமிழ் வளர்க பாரதம்"</i></p>
+        <p>At the core of it all - I’m just someone in search of my karma, a good responsible citizen of this wonderful country and every day, a better human.</p>
+        
+        <p style="text-align: center; font-size: 2rem; color: var(--indigo); font-family: 'EB Garamond';"><i>"வாழ்க தமிழ் வளர்க பாரதம்"</i></p>
+    </div>
 </section>
 
 <section id="experience" style="background: #fff;">
-    <h2>Work Experience</h2>
-    <div class="grid">
-        <div class="card">
-            <img src="https://www.ppgf.in/_next/image?url=%2Flogo.png&w=256&q=75" alt="PPGF">
-            <h3>Mukherjee Fellow</h3>
-            <p><strong>PPGF</strong> | Aug 2025 - Present</p>
-            <ul>
-                <li>Policy Analysis & Political Documentation.</li>
-                <li>Ground Intelligence and Survey Execution.</li>
-            </ul>
+    <h2 style="font-size: 3rem;">Work Experience</h2>
+    <p><i>Swipe or scroll horizontally to view my journey</i></p>
+    <div class="slider-container">
+        <div class="playcard" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url('https://tse1.mm.bing.net/th/id/OIP.GHFbOCnDkrvO-G0ilhZiAwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3');">
+            <img src="https://www.ppgf.in/_next/image?url=%2Flogo.png&w=256&q=75" class="logo-icon">
+            <div class="playcard-overlay">
+                <h3>Mukherjee Fellow</h3>
+                <p><strong>PPGF</strong> | Aug 2025 - Present</p>
+                <ul>
+                    <li>Policy Analysis & Political Documentation.</li>
+                    <li>Ground Intelligence and Survey Execution.</li>
+                </ul>
+            </div>
         </div>
-        <div class="card">
-            <img src="https://www.lab-of-the-future.com/europe/wp-content/uploads/2022/09/zifo-v1.png" alt="Zifo">
-            <h3>Analyst</h3>
-            <p><strong>Zifo</strong> | Jun 2023 - Jul 2025</p>
-            <ul>
-                <li>GCP compliant projects for Pharma MNCs.</li>
-                <li>Tools: LIMS, SNOW, C#, SQL etc.</li>
-            </ul>
+
+        <div class="playcard" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url('https://i.ytimg.com/vi/EIKaSgJCmAA/maxresdefault.jpg');">
+            <img src="https://www.lab-of-the-future.com/europe/wp-content/uploads/2022/09/zifo-v1.png" class="logo-icon">
+            <div class="playcard-overlay">
+                <h3>Analyst</h3>
+                <p><strong>Zifo</strong> | Jun 2023 - Jul 2025</p>
+                <ul>
+                    <li>GCP compliant projects for Pharma MNCs.</li>
+                    <li>Tools: LIMS, SNOW, C#, SQL etc.</li>
+                </ul>
+            </div>
         </div>
-        <div class="card">
-            <img src="https://static.wixstatic.com/media/e15095_224d2355a9144e93898ef217b0c974bb~mv2.png/v1/fill/w_718,h_138,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/e15095_224d2355a9144e93898ef217b0c974bb~mv2.png" alt="HTIC-IIT Madras">
-            <h3>Project Intern</h3>
-            <p><strong>HTIC-IIT Madras</strong> | Dec 2022 - Mar 2023</p>
-            <ul>
-                <li>Low-cost Medical Device development.</li>
-                <li>Tools: Labview, Python.</li>
-            </ul>
+
+        <div class="playcard" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url('https://tse2.mm.bing.net/th/id/OIP.BTjGEJP-9ElFVJs--VyXwgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3');">
+            <img src="https://static.wixstatic.com/media/e15095_224d2355a9144e93898ef217b0c974bb~mv2.png/v1/fill/w_718,h_138,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/e15095_224d2355a9144e93898ef217b0c974bb~mv2.png" class="logo-icon">
+            <div class="playcard-overlay">
+                <h3>Project Intern</h3>
+                <p><strong>HTIC-IIT Madras</strong> | Dec 2022 - Mar 2023</p>
+                <ul>
+                    <li>Low-cost Medical Device development.</li>
+                    <li>Tools: Labview, Python.</li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
 
 <section id="education">
-    <h2>Education</h2>
-    <div class="edu-item">
-        <h3>Bachelor of Engineering in Biomedical Engineering</h3>
-        <p><strong>Sri Ramakrishna Engineering College, Coimbatore</strong> | 2019-23</p>
-        <p>Accredited to Anna University, Chennai</p>
-    </div>    
+    <h2 style="font-size: 3rem;">Education</h2>
+    <div class="slider-container">
+        <div class="playcard" style="flex: 0 0 100%; max-width: 600px; background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://img.jagranjosh.com/images/2024/January/512024/Campus3.jpg');">
+            <div class="logo-icon" style="background: var(--saffron); color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                <i class="fas fa-microscope"></i>
+            </div>
+            <div class="playcard-overlay">
+                <h3>Bachelor of Engineering in Biomedical Engineering</h3>
+                <p><strong>Sri Ramakrishna Engineering College, Coimbatore</strong></p>
+                <p>July 2019 - May 2023 | Accredited to Anna University, Chennai</p>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section id="social" style="background: #f0f2f5;">
     <h2>Latest Activity</h2>
     <div class="social-container">
         <div class="embed-box">
-            <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7286441924259479553" height="550" width="100%" frameborder="0"></iframe>
+            <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7404393452534169600" height="994" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
         </div>
         <div class="embed-box">
             <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DRHLdzRid16/" style="width:100%;"></blockquote>
@@ -190,39 +222,14 @@
     </div>
 </section>
 
-<section id="skills">
-    <h2>Skills & Languages</h2>
-    <div class="grid">
-        <div class="card">
-            <h3><i class="fas fa-code"></i> Tech</h3>
-            <p>Python, C#, SQL, Machine Learning, LIMS, Data Structuring</p>
-        </div>
-        <div class="card">
-            <h3><i class="fas fa-users"></i> Leadership</h3>
-            <p>Political Consulting, Policy Analysis, Project Management</p>
-        </div>
-        <div class="card">
-            <h3><i class="fas fa-language"></i> Languages</h3>
-            <span class="lang-badge">Tamil (Native)</span>
-            <span class="lang-badge">English (Fluent)</span>
-            <span class="lang-badge">Malayalam (Working)</span>
-            <span class="lang-badge">Hindi (Limited)</span>
-            <span class="lang-badge">German (Elementary)</span>
-        </div>
-    </div>
-</section>
-
-<section id="contact">
-    <h2>Official Contact</h2>
-    <div class="card" style="max-width: 500px;">
-        <p><i class="fas fa-envelope" style="color:var(--indigo)"></i> <strong>Email:</strong> abineshrlofficial2001@email.com</p>
-        <p><i class="fas fa-phone" style="color:var(--indigo)"></i> <strong>Phone:</strong> +91 63830 31277</p>
-        <p><i class="fab fa-linkedin" style="color:var(--indigo)"></i> <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/abineshrl" style="color:inherit;">R L Abinesh</a></p>
-    </div>
+<section id="contact" style="background: white; text-align: center;">
+    <h2 style="font-size: 3rem;">Contact</h2>
+    <p style="font-size: 1.2rem;">Official Email: <strong>abineshrlofficial2001@email.com</strong></p>
+    <p style="font-size: 1.2rem;">Phone: <strong>+91 - 63830 31277</strong></p>
 </section>
 
 <footer>
-    <p>&copy; 2026 Abinesh R L | Built for Public Service</p>
+    <p>&copy; 2026 Abinesh R L | Biomedical Engineer, Pulic Policy and Political Consultant</p>
 </footer>
 
 </body>
