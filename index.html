@@ -1,297 +1,1263 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abinesh R L | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#0F172A',     /* Modern dark slate */
+                            indigo: '#4F46E5',   /* Elegant primary indigo */
+                            saffron: '#F97316',  /* Vibrant saffron accent */
+                            gold: '#D97706',     /* Warm rich gold */
+                            emerald: '#10B981',  /* Soft success emerald */
+                            slate800: '#1E293B',
+                            slate900: '#0F172A',
+                            slate950: '#020617'
+                        }
+                    },
+                    fontFamily: {
+                        classic: ['"EB Garamond"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS Styles -->
     <style>
-        :root {
-            --indigo: #3F51B5;
-            --saffron: #FF9933;
-            --dark: #1a1a2e;
-            --light-grey: #f4f7f9;
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
         }
-
-        * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { 
-            margin: 0; 
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--light-grey); 
-            color: #2c3e50;
+        ::-webkit-scrollbar-track {
+            background: #020617;
         }
-
-        h1, h2, h3, .fancy-text { font-family: 'EB Garamond', serif; }
-
-        /* Navigation */
-        .nav { background: rgba(26, 26, 46, 0.98); padding: 20px; text-align: center; position: sticky; top: 0; z-index: 1000; }
-        .nav a { color: white; margin: 0 20px; text-decoration: none; font-weight: 400; font-size: 1.1rem; }
-
-        /* Hero Section - Big Profile Pic & Fancy Styles */
-        .hero { 
-            background: linear-gradient(rgba(63, 81, 181, 0.9), rgba(26, 26, 46, 0.95)), 
-                        url('https://www.transparenttextures.com/patterns/cubes.png');
-            color: white; padding: 100px 20px; text-align: center; 
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
         }
-        .profile-img {
-            width: 250px; /* Big Profile Pic */
-            height: 250px;
-            border-radius: 50%;
-            border: 8px solid var(--saffron);
-            object-fit: cover;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            margin-bottom: 25px;
-            transition: transform 0.5s ease;
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f97316;
         }
-        .profile-img:hover { transform: scale(1.05) rotate(2deg); }
-        .hero h1 { font-size: 4.5rem; margin: 0; font-weight: 800; letter-spacing: -1px; }
-        .hero p { font-size: 1.4rem; font-style: italic; font-family: 'EB Garamond', serif; }
-
-        /* About Section - Aligned Paragraphs */
-        section { padding: 100px 15%; }
-        .about-content { 
-            font-size: 1.25rem; 
-            line-height: 1.8; 
-            text-align: justify; 
-            color: #444; 
-            max-width: 900px; 
-            margin: auto;
+        .text-glow-saffron {
+            text-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
         }
-        .about-content p { margin-bottom: 25px; }
-
-        /* Playcards Slider (Linear Chain) */
-        .slider-container {
-            display: flex;
-            overflow-x: auto;
-            gap: 30px;
-            padding: 40px 10px;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none; /* Hide scrollbar Firefox */
+        .text-glow-indigo {
+            text-shadow: 0 0 15px rgba(79, 70, 229, 0.4);
         }
-        .slider-container::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome */
-
-        .playcard {
-            flex: 0 0 350px;
-            height: 450px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 20px;
-            position: relative;
-            scroll-snap-align: start;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
+        .card-glow:hover {
+            box-shadow: 0 0 25px -5px rgba(79, 70, 229, 0.15), 0 0 15px -5px rgba(249, 115, 22, 0.1);
         }
-        .playcard:active { transform: scale(0.95); } /* Touch sense effect */
-
-        .playcard-overlay {
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            padding: 30px;
-            color: white;
+        /* Custom Keyframes for interactive elements */
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
         }
-        .logo-icon {
-            width: 70px; height: 70px;
-            background: white;
-            border-radius: 12px;
-            padding: 10px;
-            position: absolute;
-            top: 20px; left: 20px;
-            object-fit: contain;
+        .animate-pulse-slow {
+            animation: pulse-slow 4s infinite ease-in-out;
         }
-        .playcard h3 { font-size: 1.8rem; margin: 0; color: var(--saffron); }
-        .playcard ul { font-size: 0.95rem; padding-left: 20px; opacity: 0.9; }
-
-        /* Footer */
-        footer { background: var(--dark); color: white; text-align: center; padding: 50px; font-family: 'EB Garamond', serif; font-size: 1.2rem; }
-        .btn { background: var(--saffron); color: white; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255,153,51,0.3); }
-
     </style>
 </head>
-<body>
+<body class="bg-slate-950 text-slate-100 font-sans selection:bg-orange-500 selection:text-white overflow-x-hidden">
 
-<div class="nav">
-    <a href="#about">About</a>
-    <a href="#experience">Experience</a>
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
+<!-- Custom Notification Toast -->
+<div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 border-l-4 border-brand-saffron text-white px-5 py-3 rounded-lg shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center space-x-3">
+    <i class="fas fa-check-circle text-brand-saffron animate-bounce"></i>
+    <span id="toast-msg" class="text-sm font-medium">Text copied to clipboard!</span>
 </div>
 
-<header class="hero">
-    <img src="https://media.licdn.com/dms/image/v2/D5603AQEsdvpKr9lAAQ/profile-displayphoto-scale_200_200/B56ZliTaXbG4AY-/0/1758290881694?e=1770249600&v=beta&t=Z4KQIP3O6Gg-6w7q8rpmWcXSRpcWzm4llbEwgo3ZJOE" alt="Abinesh R L" class="profile-img">
-    <h1>Abinesh R L</h1>
-    <p>Biomedical Engineer | Public Policy & Political Consultant | Aspiring Bureaucrat | Environmentalist</p>
-    <br>
-    <a href="https://www.linkedin.com/in/abinesh-r-l-64a2881a2/" class="btn" target="_blank">Connect on LinkedIn</a>
+<nav class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-slate-900 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <div class="flex items-center space-x-3">
+                <div class="h-9 w-9 rounded-full bg-gradient-to-tr from-brand-indigo via-black-300 to-brand-saffron flex items-center justify-center font-classic text-xl font-bold text-white shadow-lg shadow-indigo-500/20">
+                    ⚛︎
+                </div>
+                <div>
+                    <span class="text-lg font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-brand-saffron bg-clip-text text-transparent">Abinesh R L</span>
+                    <span class="block text-[10px] uppercase tracking-widest text-slate-400 font-medium">Aspiring Product Manager</span>
+                </div>
+            </div>
+            
+            <!-- Desktop Nav Menu -->
+            <div class="hidden xl:flex items-center space-x-6">
+                <a href="#about" class="text-sm font-medium text-slate-300 hover:text-brand-saffron transition-colors">About</a>
+                <a href="#ProfessionalExperience" class="text-sm font-medium text-slate-300 hover:text-brand-saffron transition-colors">Professional Experience</a>
+                <a href="#projects" class="text-sm font-medium text-slate-300 hover:text-brand-saffron transition-colors">Project Portfolio</a>
+                <a href="#FellowshipAndConsulting" class="text-sm font-medium text-slate-300 hover:text-brand-saffron transition-colors">Fellowship & Strategy</a>
+                <a href="#skills" class="text-sm font-medium text-slate-300 hover:text-brand-saffron transition-colors">Skills</a>
+                <a href="#education" class="text-sm font-medium text-slate-300 hover:text-brand-saffron transition-colors">Education & Credentials</a>
+                <a href="#contact" class="px-4 py-2 text-sm font-semibold rounded-lg bg-slate-900 border border-slate-800 text-brand-saffron hover:bg-slate-800 transition-all">Contact</a>
+            </div>
+
+            <!-- Mobile Nav Toggle -->
+            <div class="xl:hidden">
+                <button id="mobile-menu-btn" class="text-slate-400 hover:text-white focus:outline-none p-2 rounded-lg hover:bg-slate-900" aria-label="Toggle menu">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Nav Menu (Hidden by default) -->
+    <div id="mobile-menu" class="hidden xl:hidden bg-slate-950 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+        <a href="#about" class="block text-base font-medium text-slate-300 hover:text-brand-saffron py-2">About</a>
+        <a href="#ProfessionalExperience" class="block text-base font-medium text-slate-300 hover:text-brand-saffron py-2">Professional Experience</a>        
+        <a href="#projects" class="block text-base font-medium text-slate-300 hover:text-brand-saffron py-2">Project Portfolio</a>
+        <a href="#FellowshipAndConsulting" class="block text-base font-medium text-slate-300 hover:text-brand-saffron py-2">Fellowship & Strategy</a>
+        <a href="#skills" class="block text-base font-medium text-slate-300 hover:text-brand-saffron py-2">Skills</a>
+        <a href="#education" class="block text-base font-medium text-slate-300 hover:text-brand-saffron py-2">Education & Credentials</a>
+        <a href="#contact" class="block text-center px-4 py-2.5 text-base font-semibold rounded-lg bg-brand-saffron text-white">Contact</a>
+    </div>
+</nav>
+
+<header class="relative py-20 lg:py-28 overflow-hidden bg-radial-gradient">
+    <!-- Grid decorative overlay -->
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-25"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left: Pitch & Bio -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center space-x-2 bg-slate-900/80 border border-slate-800 px-3.5 py-1.5 rounded-full text-xs font-semibold text-brand-saffron tracking-wide">
+                    <span class="flex h-2 w-2 rounded-full bg-orange-500 animate-ping"></span>
+                    <span>Seeking Associate Product Manager and Adjacent Product Roles</span>
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white">
+                    Hi, I'm <span class="bg-gradient-to-r from-brand-saffron via-amber-400 to-indigo-400 bg-clip-text text-transparent">Abinesh R L</span>
+                </h1>
+                
+                <h2 class="text-2xl sm:text-3xl font-classic italic text-slate-300 leading-relaxed">
+                    Looking for a fastmoving high growth environments with a clear path to become a Product Manager
+                </h2>
+                
+                <p class="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Technical professional with <strong class="text-white">3+ years of experience</strong> in rapid prototyping, analytical roadmaps, and stakeholder loops. Built and shipped an MVP cancer-screening device at <strong class="text-white">IIT Madras</strong>, resulting in a <strong class="text-white">400% efficiency gain</strong>. Skilled in <strong class="text-white">Python, SQL,</strong> and <strong class="text-white">Machine Learning</strong>.
+                </p>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4 pt-4">
+                    <a href="#projects" class="w-full sm:w-auto px-8 py-4 text-center rounded-xl font-bold bg-gradient-to-r from-brand-saffron to-amber-500 text-white hover:shadow-lg hover:shadow-orange-500/20 transform hover:-translate-y-0.5 transition-all">
+                        Explore Projects
+                    </a>
+                    <a href="https://www.linkedin.com/in/abineshrl" target="_blank" class="w-full sm:w-auto px-8 py-4 text-center rounded-xl font-bold bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-200 flex items-center justify-center space-x-2 transition-all">
+                        <i class="fab fa-linkedin text-lg text-blue-400"></i>
+                        <span>Connect on LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: Profile Frame with visual technology elements -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative group">
+                    <!-- Tech border frame effects -->
+                    <div class="absolute -inset-1.5 bg-gradient-to-tr from-brand-saffron via-purple-600 to-brand-indigo rounded-full blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                    
+                    <div class="relative bg-slate-900 p-2 rounded-full shadow-2xl">
+                        <img src="https://media.licdn.com/dms/image/v2/D5603AQEAxge8Q0NDSg/profile-displayphoto-scale_400_400/B56Z4sCsbfGgAg-/0/1778855365419?e=1782345600&v=beta&t=8LFEdJJ14c3kvW4YORcSVPzslvT9IzqwheoGLT4590U" 
+                             alt="Abinesh R L" 
+                             onerror="this.src='https://placehold.co/250x250/1e293b/ffffff?text=Abinesh+R+L'"
+                             class="w-56 h-56 sm:w-64 sm:h-64 rounded-full object-cover border-4 border-slate-800 transition duration-500 group-hover:scale-[1.02]">
+                        
+                        <!-- Mini Badge Overlay -->
+                        <div class="absolute bottom-4 right-4 bg-slate-950 border border-slate-800 text-brand-saffron h-12 w-12 rounded-full flex items-center justify-center shadow-lg hover:rotate-12 transition-transform">
+                            <i class="fas fa-shield-halved text-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
 
-<<section id="about" style="
-    padding: 100px 15%; 
-    position: relative; 
-    background-color: #ffffff;
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/17/Ashoka_Chakra.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 500px; /* Adjust size of the Chakra here */
-    background-attachment: local;
-">
-    <div style="
-        position: absolute; 
-        top: 0; left: 0; width: 100%; height: 100%; 
-        background: rgba(255, 255, 255, 0.92); /* Adjust 0.92 for more/less transparency */
-        z-index: 1;
-    "></div>
-
-    <div class="about-content" style="position: relative; z-index: 2;">
-        <h2 style="font-size: 3rem; text-align: center; margin-top: 0;">About Me</h2>
-        
-        <p>I’m an ambitious UPSC aspirant, who was earlier working in the corporate world - not out of choice, but to earn my daily bread while I chase a dream larger than myself.</p>
-        
-        <p>Now I'm transitioning towards a role which involves, supporting politicians and public representatives across the nation in their daily Legislative, Electoral and Constituency related responsibilities.</p>
-        
-        <p>With a Bachelor’s in Biomedical Engineering and interests in policy making, agronomy, sustainable urban and rural development, social justice, gender equality, and white-collar crimes.</p>
-        
-        <p>I want to understand India inside out - from its people's mind to the parliament, from its struggles to its spirit - not with noise, but with compassion, humanity, leadership, and grit.</p>
-        
-        <p>I love the Thamizh language and Bharat's culture and I have a vision to Make Bharat Great Again!</p>
-
-        <p>If the path of civil services opens for me, I’ll serve the people with all I have. If not, I’ll do the same with what I have.</p>
-
-        <p>At the core of it all - I’m just someone in search of my karma, a good responsible citizen of this wonderful country and every day, a better human.</p>
-        
-        <p style="text-align: center; font-size: 2rem; color: var(--indigo); font-family: 'EB Garamond';"><i>"வாழ்க தமிழ்!🐯 வளர்க பாரதம்! 🇮🇳"</i></p>
+<div class="border-y border-slate-900 bg-slate-900/30 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div>
+                <p class="text-3xl sm:text-4xl font-extrabold text-brand-saffron text-glow-saffron">B.E</p>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1 uppercase tracking-widest font-semibold">Biomedical Engineer</p>
+            </div>
+            <div>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white text-glow-indigo">3+ Years</p>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1 uppercase tracking-widest font-semibold">Professional Experience</p>
+            </div>
+            <div>
+                <p class="text-3xl sm:text-4xl font-extrabold text-brand-saffron text-glow-saffron">IBM PM</p>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1 uppercase tracking-widest font-semibold">Certified Professional</p>
+            </div>
+            <div>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white text-glow-indigo">Healthcare</p>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1 uppercase tracking-widest font-semibold">Agile (Scrum), AI Literacy</p>
+            </div>
+        </div>
     </div>
-</section>
+</div>
 
-<section id="experience" style="background: #fff;">
-    <h2 style="font-size: 3rem;">Work Experience</h2>
-    <p><i>Swipe or scroll horizontally to view my journey</i></p>
-    <div class="slider-container">
-        <div class="playcard" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url('https://tse1.mm.bing.net/th/id/OIP.GHFbOCnDkrvO-G0ilhZiAwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3');">
-            <img src="https://www.ppgf.in/_next/image?url=%2Flogo.png&w=256&q=75" class="logo-icon">
-            <div class="playcard-overlay">
-                <h3>Mukherjee Fellow</h3>
-                <p><strong>PPGF</strong> | Aug 2025 - Present</p>
-                <ul>
-                    <li>Policy Analysis & Political Documentation.</li>
-                    <li>Ground Intelligence and Survey Execution.</li>
-                </ul>
-            </div>
+<section id="about" class="relative py-20 lg:py-28 overflow-hidden bg-slate-950">
+    
+    <!-- Dynamic DNA Helix Canvas (Acts as an elegant, evolving background) -->
+    <div class="absolute inset-0 w-full h-full pointer-events-none opacity-20">
+        <canvas id="dna-canvas" class="w-full h-full"></canvas>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white">The Journey & Vision</h2>
+            <div class="h-1 w-20 bg-brand-saffron mx-auto mt-4 rounded-full"></div>
+        </div>
+        <div class="space-y-6 text-slate-300 text-base sm:text-lg leading-relaxed text-justify">
+            <p>
+                I am an ambitious professional who bridges the gap between structured corporate systems and state-level policy execution. Transitioning from biomedical technology to political-legislative strategy, I spend my energy supporting national public representatives in daily Legislative, Electoral, and Constituency mandates.
+            </p>
+            <p>
+                My foundation in <strong class="text-white">Biomedical Engineering</strong> underpins my problem-solving strategy: dissecting highly complex, life-or-death systems down to their feedback loops and key parameters. I bring this precise, product-oriented analytical framework into governance, economic strategy, and healthcare infrastructure.
+            </p>
+            <p>
+                Whether building product roadmaps to bypass urban congestion or analyzing compliance of street hawker acts, my aim is to design intuitive, citizen-centric ecosystems. I seek to serve Bharat with grit, structure, compassion, and relentless leadership.
+            </p>
         </div>
 
-        <div class="playcard" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url('https://i.ytimg.com/vi/EIKaSgJCmAA/maxresdefault.jpg');">
-            <img src="https://www.lab-of-the-future.com/europe/wp-content/uploads/2022/09/zifo-v1.png" class="logo-icon">
-            <div class="playcard-overlay">
-                <h3>Analyst</h3>
-                <p><strong>Zifo</strong> | Jun 2023 - Jul 2025</p>
-                <ul>
-                    <li>GCP compliant projects for Pharma MNCs.</li>
-                    <li>Tools: LIMS, SNOW, C#, SQL etc.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="playcard" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url('https://tse2.mm.bing.net/th/id/OIP.BTjGEJP-9ElFVJs--VyXwgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3');">
-            <img src="https://seeklogo.com/images/I/iit-madras-logo-0B28C23C92-seeklogo.com.png" class="logo-icon">
-            <div class="playcard-overlay">
-                <h3>Project Intern</h3>
-                <p><strong>HTIC-IIT Madras</strong> | Dec 2022 - Mar 2023</p>
-                <ul>
-                    <li>Low-cost Medical Device development.</li>
-                    <li>Tools: Labview, Python.</li>
-                </ul>
-            </div>
+        <div class="mt-12 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 text-center relative group overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 h-32 w-32 bg-brand-saffron/10 rounded-full blur-2xl"></div>
+            <p class="text-xs uppercase tracking-widest text-slate-500 mt-2 font-semibold">
+                "Any product that needs a manual to work is broken"
+            </p>
+            <p class="font-classic text-2xl sm:text-3xl text-brand-saffron italic tracking-wide mt-1">
+                - Elon Musk
+            </p>
         </div>
     </div>
 </section>
 
-<section id="education">
-    <h2 style="font-size: 3rem;">Education</h2>
-    <div class="slider-container">
-        <div class="playcard" style="flex: 0 0 100%; max-width: 600px; background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://img.jagranjosh.com/images/2024/January/512024/Campus3.jpg');">
+<!-- PROJECT PORTFOLIO SECTION -->
+<section id="projects" class="py-20 lg:py-28 bg-slate-900/20 border-t border-slate-900 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white font-sans">Product Projects Portfolio</h2>
+            <p class="text-slate-400 mt-2 max-w-2xl mx-auto">Demonstrated capability in identifying and translating problems into explicit product requirements and functional layouts.</p>
+            <div class="h-1 w-20 bg-brand-saffron mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <!-- Project Choice Tabs -->
+        <div class="flex justify-center mb-10">
+            <div class="bg-slate-900/80 p-1.5 rounded-xl border border-slate-800 flex space-x-1">
+                <button onclick="switchProject('jar')" id="tab-jar" class="px-3 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-brand-saffron text-white shadow-md">
+                    1. Jan Arogya Pusthak (JAP)
+                </button>
+                <button onclick="switchProject('routes')" id="tab-routes" class="px-3 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-white">
+                    2. Local Routes Confidence Layer (LRCL)
+                </button>
+            </div>
+        </div>
+
+        <!-- Split Interface Layout: Left (Terminal Readme) & Right (PRD PDF Embed Viewport) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             
-            <div class="logo-icon" style="background: var(--saffron); color: white; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; box-shadow: 0 0 15px rgba(255, 153, 51, 0.5);">
-                <i class="fas fa-graduation-cap"></i>
+            <!-- Left Panel: Github Repo Terminal (7 Cols) -->
+            <div class="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col justify-between">
+                
+                <!-- Terminal Header bar -->
+                <div class="bg-slate-950 border-b border-slate-800 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="flex space-x-1.5">
+                            <span class="w-3 h-3 rounded-full bg-red-500 block"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500 block"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500 block"></span>
+                        </div>
+                        <span class="text-slate-400 text-xs font-mono">|</span>
+                        <span id="prd-title" class="text-sm font-bold tracking-wide text-slate-200 font-mono">jan-arogya-pusthak-prd.docx</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <a id="github-link-badge" href="https://github.com/abinesh007/JanArogyaPusthak-App" target="_blank" class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[10px] text-brand-saffron hover:bg-slate-800 hover:text-white transition duration-200 uppercase font-bold tracking-widest flex items-center space-x-1">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub Repository</span>
+                        </a>                        
+                        <a id="live-demo-badge" href="https://abinesh007.github.io/JanArogyaPusthak-App/" target="_blank" class="px-3.5 py-1 rounded bg-brand-indigo hover:bg-indigo-700 text-xs font-semibold text-white transition flex items-center space-x-1">
+                            <i class="fas fa-external-link-alt text-[10px]"></i> <span>Live Web App</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Spec Body / Simulated README Markdown Reader -->
+                <div id="prd-content-box" class="p-6 sm:p-8 text-slate-300 overflow-y-auto max-h-[500px] font-sans space-y-6 leading-relaxed">
+                    
+                    <!-- Project 1: JAP README (Dynamic Display) -->
+                    <div id="project-jar-content" class="space-y-6">
+                        <div class="border-b border-slate-800 pb-4">
+                            <span class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 text-indigo-400 rounded-md">Unified Health Record System</span>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white mt-2">Jan Arogya Pusthak (JAP)</h3>
+                            <p class="text-xs sm:text-sm text-slate-400 italic mt-1">A Unified Digital Health Passbook for rural PHCs, clinics, and government hospitals.</p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-2 text-brand-saffron font-semibold text-sm">
+                                <i class="fab fa-readme"></i>
+                                <span>README.md Summary</span>
+                            </div>
+                            
+                            <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 text-xs sm:text-sm font-mono space-y-4 text-slate-300 leading-relaxed">
+                                <p class="text-indigo-400 font-bold"># Jan Arogya Pusthak (JAP) - ABDM Micro-Portal</p>
+                                <p><strong>📌 Problem Space:</strong> Fragile paper logs are easily damaged or misplaced by rural patients. Existing portal solutions (like native ABHA applications) demand consistent high-bandwidth 4G networks and expensive smartphone terminals, entirely locking out over 60% of rural clinical demographics.</p>
+                                
+                                <p><strong>🚀 The Architecture Solution:</strong> JAP introduces an ultra-lightweight browser registry engineered to request patient clinical health records directly via secure Ayushman Bharat Digital Mission (ABDM) Gateway configurations.</p>
+                                
+                                <div class="border-l-4 border-brand-saffron pl-3 py-1 bg-slate-900/40 rounded">
+                                    <span class="text-white block font-semibold mb-1">Key Product Vectors:</span>
+                                    • Consent Flow Integration: Requests authorization securely over lightweight data packets.<br>
+                                    • Multi-Channel Notifications: Alerts dispatched via SMS or structured WhatsApp text layouts.<br>
+                                    • Client Registry Search: Empowers primary healthcare (PHC) clinicians to search historical logs in &lt; 3s.
+                                </div>
+
+                                <p><strong>🛠️ Stack:</strong> Tailwind CSS, HTML5 Canvas integration, ES6 Modules, Cryptographic OTP Consent API protocols.</p>
+                            </div>
+                        </div>                        
+                    </div>
+
+                    <!-- Project 2: Local Routes README (Dynamic Display, Hidden by default) -->
+                    <div id="project-routes-content" class="hidden space-y-6">
+                        <div class="border-b border-slate-800 pb-4">
+                            <span class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-orange-500/10 text-brand-saffron rounded-md">Dynamic Routing Filters</span>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white mt-2">Local Routes Confidence Layer (LRCL)</h3>
+                            <p class="text-xs sm:text-sm text-slate-400 italic mt-1">An integrated navigational confidence indicator tailored to bypass high-congestion municipal bottlenecks.</p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-2 text-brand-saffron font-semibold text-sm">
+                                <i class="fab fa-readme"></i>
+                                <span>README.md Summary</span>
+                            </div>
+                            
+                            <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 text-xs sm:text-sm font-mono space-y-4 text-slate-300 leading-relaxed">
+                                <p class="text-orange-400 font-bold"># Local Routes Confidence Layer (LRCL) - Routing Engine</p>
+                                <p><strong>📌 Problem Space:</strong> Standard routing platforms (Google Maps APIs) optimize exclusively for shortest geographical paths or broad vehicular traffic averages. In densely populated, developing cities, this sends standard cars down extremely narrow pathways (width &lt; 3m) or bustling local bazaars, causing catastrophic bottlenecks and vehicle damage.</p>
+                                
+                                <p><strong>🚀 The Algorithmic Solution:</strong> A layered middleware protocol that injects a mathematical "Confidence Coefficient" (<strong class="text-white">C</strong>) directly onto active routing vectors. If a narrow municipal road drops below safety thresholds, standard GPS directions immediately route larger vehicles away.</p>
+                                
+                                <div class="border-l-4 border-indigo-500 pl-3 py-1 bg-slate-900/40 rounded">
+                                    <span class="text-white block font-semibold mb-1">Algorithmic Formulation:</span>
+                                    Confidence Score Formula:<br>
+                                    <code class="text-brand-saffron">C = Width_Coeff * 10 - Ped_Density_Factor - Vendor_Risk_Weight</code>
+                                </div>
+
+                                <p><strong>🛠️ Stack:</strong> Google Maps JS API framework overrides, Python optimization scripts, GIS routing databases, municipal data hooks.</p>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+
+                <!-- Console Footer Details -->
+                <div class="p-4 bg-slate-950 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-between">
+                    <span class="text-brand-saffron font-bold flex items-center space-x-1.5">
+                        <i class="fas fa-terminal"></i>
+                        <span>System Console Connected</span>
+                    </span>
+                    <span class="text-slate-500" id="terminal-size">Refer Git Repository</span>
+                </div>
             </div>
 
-            <div class="playcard-overlay">
-                <h3 style="font-family: 'EB Garamond', serif; font-size: 2rem;">Bachelor of Engineering in Biomedical Engineering</h3>
-                <p style="font-size: 1.1rem;"><strong>Sri Ramakrishna Engineering College, Coimbatore</strong></p>
-                <p style="opacity: 0.9;">July 2019 - May 2023 | Accredited to Anna University, Chennai</p>
+            <!-- Right Panel: Elegant PRD PDF Frame Viewer (5 Cols) -->
+            <div class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-2xl flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-tr from-brand-indigo/5 to-transparent pointer-events-none"></div>
+                
+                <div class="relative z-10 space-y-4 h-full flex flex-col justify-between">
+                    <!-- PDF Embed Header bar -->
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <span class="text-xs uppercase tracking-widest text-slate-400 font-bold flex items-center space-x-1.5">
+                            <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <span id="pdf-view-title">Loading PDF...</span>
+                        </span>
+                        
+                        <!-- Actions button for fallback loading issues -->
+                        <a id="pdf-fallback-link" href="#" target="_blank" class="p-1 px-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-xs transition flex items-center space-x-1 border border-slate-700 hover:text-brand-saffron" title="Open PDF in new window">
+                            <i class="fas fa-external-link-alt text-[10px]"></i>
+                            <span>View External</span>
+                        </a>
+                    </div>
+
+                    <!-- Scrollable Embed Frame Container -->
+                    <div class="flex-grow w-full h-[400px] sm:h-[480px] rounded-xl overflow-hidden bg-slate-950 border border-slate-800 relative">
+                        <!-- Iframes embed PDF file through Google Docs Viewer for seamless device-responsive and scrollable reading -->
+                        <iframe id="pdf-iframe-viewer" src="" class="w-full h-full absolute inset-0 z-10" border="0" style="border: none;"></iframe>
+                        
+                        <!-- Loader / Backing Info if direct embeds get blocked by sandbox policies -->
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center space-y-3 z-0">
+                            <div class="h-10 w-10 rounded-full border-2 border-brand-saffron/30 border-t-brand-saffron animate-spin"></div>
+                            <p class="text-xs text-slate-400">Loading Document PDF Preview...</p>
+                            <p class="text-[10px] text-slate-500 max-w-[200px]">If your browser restricts embedding, click "View External" to access the file directly.</p>
+                        </div>
+                    </div>
+
+                    <!-- Footer detail indicators -->
+                    <div class="pt-2 text-[10px] text-slate-500 flex items-center justify-between border-t border-slate-800/60">
+                        <span class="flex items-center space-x-1">
+                            <i class="fas fa-lock text-emerald-400"></i>
+                            <span>Sandboxed View</span>
+                        </span>
+                        <span>Scale: Fit to Width</span>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 </section>
 
-<section id="social" style="background: #f0f2f5; padding: 80px 10%;">
-    <h2 style="font-size: 3rem; text-align: center; font-family: 'EB Garamond', serif;">Latest Activity</h2>
-    <p style="text-align: center; margin-bottom: 40px; color: #666; font-family: 'Inter', sans-serif;">Perspectives on Policy, Heritage, and Development</p>
-
-    <div class="social-grid" style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; align-items: stretch;">
+<!-- EXPERIENCE SECTION -->
+<section id="ProfessionalExperience" class="py-20 lg:py-28 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div class="social-card" style="flex: 1; min-width: 320px; max-width: 520px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #0077b5; display: flex; flex-direction: column;">
-            <div style="padding: 20px; text-align: center; flex-grow: 1;">
-                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
-                    <i class="fab fa-linkedin" style="font-size: 2rem; color: #0077b5; margin-right: 10px;"></i>
-                    <h3 style="margin: 0; font-family: 'Inter', sans-serif; font-size: 1.2rem; color: #333;">Professional Insights</h3>
-                </div>
-                
-                <div style="height: 630px; overflow-y: auto; border-radius: 10px; border: 1px solid #eee; background: #fff;">
-                    <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7358082316646182913?collapsed=1" 
-                            height="100%" 
-                            width="100%" 
-                            frameborder="0" 
-                            allowfullscreen="" 
-                            title="Embedded post">
-                    </iframe>
-                </div>
-                
-                <a href="https://www.linkedin.com/in/abinesh-r-l-64a2881a2/" target="_blank" style="display: inline-block; margin-top: 15px; color: #0077b5; text-decoration: none; font-weight: 600; font-size: 0.9rem;">
-                    View on LinkedIn <i class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i>
-                </a>
-            </div>
+        <div class="text-center mb-16">
+            <span class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-indigo-400 bg-indigo-500/10 rounded-full">Work History</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">Professional Experience</h2>
+            <div class="h-1 w-20 bg-brand-saffron mx-auto mt-4 rounded-full"></div>
         </div>
 
-        <div class="social-card" style="flex: 1; min-width: 320px; max-width: 520px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #e1306c; display: flex; flex-direction: column;">
-            <div style="padding: 20px; text-align: center; flex-grow: 1;">
-                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
-                    <i class="fab fa-instagram" style="font-size: 2rem; color: #e1306c; margin-right: 10px;"></i>
-                    <h3 style="margin: 0; font-family: 'Inter', sans-serif; font-size: 1.2rem; color: #333;">Visual Journey</h3>
-                </div>
+        <div class="relative border-l border-slate-800 max-w-4xl mx-auto pl-6 sm:pl-10 space-y-12">
+            
+            <!-- Experience Item 1: Zifo Technologies -->
+            <div class="relative group">
+                <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 bg-slate-950 border-2 border-indigo-500 h-5 w-5 rounded-full z-10 group-hover:scale-125 transition-transform duration-300"></div>
                 
-                <div style="height: 630px; overflow-y: auto; border-radius: 10px; border: 1px solid #eee; background: #fff;">
-                    <blockquote class="instagram-media" 
-                                data-instgrm-permalink="https://www.instagram.com/p/DRHLdzRid16/" 
-                                data-instgrm-version="14" 
-                                style="width:calc(100% - 2px); margin:0; padding:0; border:none;">
-                    </blockquote>
+                <div class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-indigo-500/30 transition duration-300 shadow-xl relative overflow-hidden group">
+                    <!-- Faded background overlay showcasing corporate biotech/research office environment -->
+                    <div class="absolute right-0 top-0 bottom-0 w-1/3 sm:w-1/2 h-full bg-cover bg-center opacity-10 group-hover:opacity-25 transition-all duration-300 pointer-events-none mix-blend-screen" style="background-image: url('https://media.licdn.com/dms/image/v2/D5622AQEkzFY5kIsRVA/feedshare-shrink_800/B56Z6OdVTOKMAc-/0/1780506516998?e=2147483647&v=beta&t=0OBf9L5orgymH4V7uY4RyEI-g-uBy4XGBplBmUQuWEc'); -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 10%, transparent 100%); mask-image: linear-gradient(to left, rgba(0,0,0,1) 10%, transparent 100%);"></div>
+                    
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 relative z-10">
+                        <div class="flex items-center space-x-3">
+                            <!-- Logo for Zifo -->
+                            <div class="h-20 w-20 bg-white border border-slate-800 rounded-xl flex items-center justify-center p-2 shadow-md flex-shrink-0">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq0ajPQWGUApT6UOx1qK9shXrNl-E6wCYq8Q&s" class="max-h-full max-w-full object-contain" alt="Zifo Logo">
+                            </div>
+                            <div>
+                                <span class="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-indigo-400 bg-indigo-500/10 rounded-full mb-1">Corporate Consulting - Pharma</span>
+                                <h3 class="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">Analyst (LIMS and Clinical Research)</h3>
+                                <p class="text-sm text-slate-300 font-medium">Zifo Technologies Pvt Ltd</p>
+                            </div>
+                        </div>
+                        <div class="text-left sm:text-right flex-shrink-0">
+                            <span class="text-sm font-semibold text-indigo-400 block"><i class="far fa-calendar-alt mr-1.5"></i>Jun 2023 - Jul 2025</span>
+                            <span class="text-xs text-slate-500"><i class="fas fa-map-marker-alt mr-1"></i>Chennai, Tamil Nadu</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Content loop details (Styled with bottom-right positioned box matching requested layout) -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end relative z-10">
+                        <div class="md:col-span-8">
+                            <ul class="space-y-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">
+                                <li class="flex items-start">
+                                    <span class="text-indigo-400 mr-2.5 mt-1.5 text-xs flex-shrink-0"><i class="fas fa-check"></i></span>
+                                    <span>Headed requirement gathering, ticket prioritization and SLA compliance audits for 5+ top-tier US & European Pharma MNC partners using Jira.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-indigo-400 mr-2.5 mt-1.5 text-xs flex-shrink-0"><i class="fas fa-check"></i></span>
+                                    <span>Reduced average incident resolution times by <strong class="text-white">25%</strong> by executing deep root-cause analyses and introducing automated standard CAPA workflows.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-indigo-400 mr-2.5 mt-1.5 text-xs flex-shrink-0"><i class="fas fa-check"></i></span>
+                                    <span>Engineered custom operational dashboards tracking cross-team deliverables, increasing general operational efficiency by <strong class="text-white">15%</strong>.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Consulting Stack - Beautifully positioned in the right bottom corner of the card -->
+                        <div class="md:col-span-4 bg-[#0B132B]/95 p-5 rounded-2xl border border-slate-850/80 shadow-2xl flex flex-col justify-between h-auto md:self-end w-full max-w-sm ml-auto">
+                            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold block mb-4 text-center">Consulting Stack</span>
+                            
+                            <div class="space-y-2.5 mb-4">
+                                <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-850 flex justify-between items-center text-xs">
+                                    <span class="text-slate-300 font-medium">1. SLA Compliance</span>
+                                    <span class="text-brand-saffron font-bold text-xs">100%</span>
+                                </div>
+                                <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-850 flex justify-between items-center text-xs">
+                                    <span class="text-slate-300 font-medium">2. Root-Cause CAPA</span>
+                                    <span class="text-brand-indigo font-bold text-xs">Resolved</span>
+                                </div>
+                                <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-850 flex justify-between items-center text-xs">
+                                    <span class="text-slate-300 font-medium">3. Global Systems</span>
+                                    <span class="text-brand-emerald font-bold text-xs">LIMS</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-center space-x-2 text-xs text-slate-300 border-t border-slate-800/80 pt-3">
+                                <i class="fas fa-chart-line text-brand-saffron"></i>
+                                <span class="font-medium text-slate-400">Managed 5 Global Clients</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <a href="https://www.instagram.com/rl.abinesh/" target="_blank" style="display: inline-block; margin-top: 15px; color: #e1306c; text-decoration: none; font-weight: 600; font-size: 0.9rem;">
-                    Follow on Instagram <i class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i>
-                </a>
             </div>
-        </div>
 
+            <!-- Experience Item 2: HTIC IIT Madras -->
+            <div class="relative group">
+                <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 bg-slate-950 border-2 border-emerald-500 h-5 w-5 rounded-full z-10 group-hover:scale-125 transition-transform duration-300"></div>
+                
+                <div class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-emerald-500/30 transition duration-300 shadow-xl relative overflow-hidden group">
+                    <!-- Faded background overlay showcasing IIT Madras Research Park / laboratory tech structures -->
+                    <div class="absolute right-0 top-0 bottom-0 w-1/3 sm:w-1/2 h-full bg-cover bg-center opacity-10 group-hover:opacity-25 transition-all duration-300 pointer-events-none mix-blend-screen" style="background-image: url('https://static.businessworld.in/IIT-Madras-Research-Park%20(1)%20(1)_20250724162433_ogImage_27.jpg'); -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 10%, transparent 100%); mask-image: linear-gradient(to left, rgba(0,0,0,1) 10%, transparent 100%);"></div>
+                    
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 relative z-10">
+                        <div class="flex items-center space-x-3">
+                            <!-- HTIC Logo -->
+                            <div class="h-20 w-20 bg-white border border-slate-800 rounded-xl flex items-center justify-center p-2 shadow-md flex-shrink-0">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5rcOCLpOO8kcJLjav3M-zaipYS-HYNIptUw&s" class="max-h-full max-w-full object-contain" alt="HTIC Logo">
+                            </div>
+                            <div>
+                                <span class="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 rounded-full mb-1">MVP Prototyping</span>
+                                <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Project Engineer Intern</h3>
+                                <p class="text-sm text-slate-300 font-medium">Healthcare Technology Innovation Centre (HTIC) - IIT Madras</p>
+                            </div>
+                        </div>
+                        <div class="text-left sm:text-right flex-shrink-0">
+                            <span class="text-sm font-semibold text-indigo-400 block"><i class="far fa-calendar-alt mr-1.5"></i>Dec 2022 - Mar 2023</span>
+                            <span class="text-xs text-slate-500"><i class="fas fa-map-marker-alt mr-1"></i>IIT Madras Research Park</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Content grid metrics (Styled with bottom-right positioned box matching requested layout) -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end relative z-10">
+                        <div class="md:col-span-8">
+                            <ul class="space-y-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">
+                                <li class="flex items-start">
+                                    <span class="text-emerald-400 mr-2.5 mt-1.5 text-xs flex-shrink-0"><i class="fas fa-check"></i></span>
+                                    <span>Spearheaded end-to-end development of a Python-based cancer-screening analytical tool, translating highly technical clinical parameters into simple operational metrics.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-emerald-400 mr-2.5 mt-1.5 text-xs flex-shrink-0"><i class="fas fa-check"></i></span>
+                                    <span>Achieved a massive <strong class="text-white">400% efficiency boost</strong> in clinical data capturing (moving throughput limits from 2-5 records daily to 25+ records).</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-emerald-400 mr-2.5 mt-1.5 text-xs flex-shrink-0"><i class="fas fa-check"></i></span>
+                                    <span>Orchestrated tight weekly qualitative clinical user loops, shipping <strong class="text-white">5 iteration runs within 12 weeks</strong> based directly on clinician pain-points.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Prototype Blueprint - Cohesively positioned in the bottom-right corner of the card -->
+                        <div class="md:col-span-4 bg-[#0B132B]/95 p-5 rounded-2xl border border-slate-850/80 shadow-2xl flex flex-col justify-between h-auto md:self-end w-full max-w-sm ml-auto">
+                            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold block mb-4 text-center">Prototype Blueprint</span>
+                            
+                            <div class="space-y-2.5 mb-4">
+                                <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-850 flex justify-between items-center text-xs">
+                                    <span class="text-slate-300 font-medium">1. Python MVP Tool</span>
+                                    <span class="text-brand-saffron font-bold text-xs">100%</span>
+                                </div>
+                                <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-850 flex justify-between items-center text-xs">
+                                    <span class="text-slate-300 font-medium">2. Clinical User Loops</span>
+                                    <span class="text-brand-indigo font-bold text-xs">5 Runs</span>
+                                </div>
+                                <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-850 flex justify-between items-center text-xs">
+                                    <span class="text-slate-300 font-medium">3. Data Yield</span>
+                                    <span class="text-brand-emerald font-bold text-xs">+400%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-center space-x-2 text-xs text-slate-300 border-t border-slate-800/80 pt-3">
+                                <i class="fas fa-microchip text-brand-emerald"></i>
+                                <span class="font-medium text-slate-400">IIT Madras Research Park</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </section>
 
-<script async src="//www.instagram.com/embed.js"></script>
+<!-- FELLOWSHIP AND CONSULTING SECTION -->
+<section id="FellowshipAndConsulting" class="py-20 lg:py-28 bg-slate-900/30 border-t border-slate-900 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-16">
+            <span class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-brand-saffron bg-orange-500/10 rounded-full">Governance Strategy</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">Policy Consulting & Fellowship</h2>
+            <div class="h-1 w-20 bg-brand-saffron mx-auto mt-4 rounded-full"></div>
+        </div>
 
-<section id="contact" style="background: white; text-align: center;">
-    <h2 style="font-size: 3rem;">Contact</h2>
-    <p style="font-size: 1.2rem;">Official Email: <strong>abineshrlofficial2001@email.com</strong></p>
-    <p style="font-size: 1.2rem;">Phone: <strong>+91 - 63830 31277</strong></p>
+        <div class="relative border-l border-slate-800 max-w-4xl mx-auto pl-6 sm:pl-10 space-y-12">                    
+    
+            <!-- Experience Item 1: Mukherjee Fellowship -->
+            <div class="relative group">
+                <!-- Timeline Dot Indicator -->
+                <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 bg-slate-950 border-2 border-brand-saffron h-5 w-5 rounded-full z-10 group-hover:scale-125 transition-transform duration-300"></div>
+                
+                <div class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-brand-saffron/30 transition duration-300 shadow-xl relative overflow-hidden group">
+                    <!-- Faded background overlay showcasing New Delhi parliament / legislative structure -->
+                    <div class="absolute right-0 top-0 bottom-0 w-1/3 sm:w-1/2 h-full bg-cover bg-center opacity-10 group-hover:opacity-25 transition-all duration-300 pointer-events-none mix-blend-screen" style="background-image: url('https://yischoolhub.org/wp-content/uploads/2024/03/lok-sabha.jpeg'); -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 10%, transparent 100%); mask-image: linear-gradient(to left, rgba(0,0,0,1) 10%, transparent 100%);"></div>
+                    
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 relative z-10">
+                        <div class="flex items-center space-x-3">
+                            <!-- PPGF Logo -->
+                            <div class="h-20 w-20 bg-white border border-slate-800 rounded-xl flex items-center justify-center p-2 shadow-md flex-shrink-0">
+                                <img src="https://pbs.twimg.com/profile_images/1354312121366900737/7QRsaX-8_400x400.jpg" class="max-h-full max-w-full object-contain" alt="PPGF Logo">
+                            </div>
+                            <div>
+                                <span class="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-saffron bg-orange-500/10 rounded-full mb-1">Mukherjee Fellowship</span>
+                                <h3 class="text-xl font-bold text-white group-hover:text-brand-saffron transition-colors">Mukherjee Fellow</h3>
+                                <p class="text-sm text-slate-300 font-medium">The Policy, Politics and Governance Foundation (PPGF)</p>
+                            </div>
+                        </div>
+                        <div class="text-left sm:text-right flex-shrink-0">
+                            <span class="text-sm font-semibold text-indigo-400 block"><i class="far fa-calendar-alt mr-1.5"></i>Aug 2025 - Jul 2026</span>
+                            <span class="text-xs text-slate-500"><i class="fas fa-map-marker-alt mr-1"></i>New Delhi, India</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Content grid with visual representations (Aligned nicely with bottom right layout) -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end relative z-10">
+                        <div class="md:col-span-8">
+                            <ul class="space-y-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">
+                                <li class="flex items-start">
+                                    <span class="text-brand-saffron mr-2.5 mt-1.5 text-xs flex-shrink-0"><i class="fas fa-check"></i></span>
+                                    <span>Performed quantitative, data-driven assessments of federal policy compliance—specifically examining street hawker regulations and fertilizer consumption analytics.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-brand-saffron mr-2.5 mt-1.5 text-xs flex-shrink-0"><i class="fas fa-check"></i></span>
+                                    <span>Conducted impact audits of strategic industrial closures and delivered comprehensive risk mitigation reports directly to high-tier stakeholders.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-brand-saffron mr-2.5 mt-1.5 text-xs flex-shrink-0"><i class="fas fa-check"></i></span>
+                                    <span>Drafted <strong class="text-white">15+ high-impact parliamentary questionnaires</strong> based on robust citizen-first requirement pipelines and localized constituency priorities.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-brand-saffron mr-2.5 mt-1.5 text-xs flex-shrink-0"><i class="fas fa-check"></i></span>
+                                    <span>Authored an Assembly-level Constituency Manifesto (framed closely as a Product Requirements Document) outlining localized metrics and strategic priorities.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Graphical representation for Policy Mapping - Placed neatly in the right bottom corner of the card -->
+                        <div class="md:col-span-4 bg-[#0B132B]/95 p-5 rounded-2xl border border-slate-850/80 shadow-2xl flex flex-col justify-between h-auto md:self-end w-full max-w-sm ml-auto">
+                            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold block mb-4 text-center">Constituency Flow</span>
+                            
+                            <div class="space-y-2.5 mb-4">
+                                <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-850 flex justify-between items-center text-xs">
+                                    <span class="text-slate-300 font-medium">1. Local Audit</span>
+                                    <span class="text-brand-saffron font-bold text-xs">100%</span>
+                                </div>
+                                <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-850 flex justify-between items-center text-xs">
+                                    <span class="text-slate-300 font-medium">2. Policy Metric</span>
+                                    <span class="text-brand-indigo font-bold text-xs">Passed</span>
+                                </div>
+                                <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-850 flex justify-between items-center text-xs">
+                                    <span class="text-slate-300 font-medium">3. Manifestos</span>
+                                    <span class="text-brand-emerald font-bold text-xs">Active</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-center space-x-2 text-xs text-slate-300 border-t border-slate-800/80 pt-3">
+                                <i class="fas fa-landmark text-brand-indigo"></i>
+                                <span class="font-medium text-slate-400">15+ Parliamentary Briefs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </section>
 
-<footer>
-    <p>&copy; 2026 Abinesh R L | Biomedical Engineer, Pulic Policy and Political Consultant</p>
+<!-- SKILLS SECTION -->
+<section id="skills" class="py-20 lg:py-28 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-16">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Skills and Expertise</h2>
+            <p class="text-slate-400 mt-2 max-w-2xl mx-auto">Using empirical metrics and competence to make real-world impact.</p>
+            <div class="h-1 w-20 bg-brand-saffron mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Category 1: Product Management Systems -->
+            <div class="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-brand-saffron/40 transition duration-300 card-glow flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <span class="h-12 w-12 rounded-xl bg-orange-500/10 text-brand-saffron flex items-center justify-center text-xl">
+                            <i class="fas fa-cubes"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-lg font-bold text-white leading-tight">Product Management</h3>
+                            <span class="text-[9px] uppercase tracking-widest text-slate-500 font-mono font-bold block mt-0.5">Subsystem loop [PM-01]</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <!-- PM Skill 1 -->
+                        <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-900 hover:border-brand-saffron/30 transition duration-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-xs font-semibold text-slate-200">Problem Discovery & Loops</span>
+                                <span class="px-1.5 py-0.5 rounded bg-orange-500/10 text-[9px] font-mono text-brand-saffron font-bold">ACTIVE LOOP</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Synthesized 5 rapid quantitative & clinical user feedback iterations at IITM into single-pane MVP screening tool.</p>
+                        </div>
+
+                        <!-- PM Skill 2 -->
+                        <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-900 hover:border-brand-saffron/30 transition duration-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-xs font-semibold text-slate-200">PRD & Story Spec Drafting</span>
+                                <span class="px-1.5 py-0.5 rounded bg-emerald-500/10 text-[9px] font-mono text-emerald-400 font-bold">COMPILED</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Drafted localized constituency briefs and complex digital passbook specifications (JAP) mapped to user targets.</p>
+                        </div>
+
+                        <!-- PM Skill 3 -->
+                        <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-900 hover:border-brand-saffron/30 transition duration-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-xs font-semibold text-slate-200">Agile Frameworks & Scrum</span>
+                                <span class="px-1.5 py-0.5 rounded bg-indigo-500/10 text-[9px] font-mono text-indigo-400 font-bold">SLA CONTROL</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Headed ticket prioritize, sprint boards, and compliance loops with global partners under rigid SLAs at Zifo.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 pt-4 border-t border-slate-800/80 flex flex-wrap gap-1.5">
+                    <span class="px-2 py-0.5 bg-slate-950 border border-slate-800 rounded text-[10px] text-slate-400 font-mono">Prioritization</span>
+                    <span class="px-2 py-0.5 bg-slate-950 border border-slate-800 rounded text-[10px] text-slate-400 font-mono">Figma Layouts</span>
+                    <span class="px-2 py-0.5 bg-slate-950 border border-slate-800 rounded text-[10px] text-slate-400 font-mono">A/B Experiments</span>
+                </div>
+            </div>
+
+            <!-- Category 2: Technical Toolkit & ML -->
+            <div class="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-indigo-500/40 transition duration-300 card-glow flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <span class="h-12 w-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl">
+                            <i class="fas fa-code"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-lg font-bold text-white leading-tight">Tech, Data & ML</h3>
+                            <span class="text-[9px] uppercase tracking-widest text-slate-500 font-mono font-bold block mt-0.5">Analytics Stack [TECH-02]</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <!-- Tech Skill 1 -->
+                        <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-900 hover:border-indigo-500/30 transition duration-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-xs font-semibold text-slate-200">Python & Machine Learning</span>
+                                <span class="px-1.5 py-0.5 rounded bg-indigo-500/10 text-[9px] font-mono text-indigo-400 font-bold">PIPELINE ON</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Developed diagnostic processing modules mapping raw physical biological metrics to classification outputs.</p>
+                        </div>
+
+                        <!-- Tech Skill 2 -->
+                        <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-900 hover:border-indigo-500/30 transition duration-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-xs font-semibold text-slate-200">SQL & Structured Analytics</span>
+                                <span class="px-1.5 py-0.5 rounded bg-emerald-500/10 text-[9px] font-mono text-emerald-400 font-bold">DEPLOYED</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Engineered operational database structures and custom tracking dashboards boosting pipeline efficiency by 15%.</p>
+                        </div>
+
+                        <!-- Tech Skill 3 -->
+                        <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-900 hover:border-indigo-500/30 transition duration-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-xs font-semibold text-slate-200">Prompt Engineering & AI</span>
+                                <span class="px-1.5 py-0.5 rounded bg-orange-500/10 text-[9px] font-mono text-brand-saffron font-bold">INTEGRATED</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Engineered context-locked prompt templates to parse, catalog, and map public policy files automatically.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-slate-800/80 flex flex-wrap gap-1.5">
+                    <span class="px-2 py-0.5 bg-slate-950 border border-slate-800 rounded text-[10px] text-slate-400 font-mono">SQL Queries</span>
+                    <span class="px-2 py-0.5 bg-slate-950 border border-slate-800 rounded text-[10px] text-slate-400 font-mono">MS Excel</span>
+                    <span class="px-2 py-0.5 bg-slate-950 border border-slate-800 rounded text-[10px] text-slate-400 font-mono">Artificial Intelligence</span>
+                </div>
+            </div>
+
+            <!-- Category 3: Policy, Strategy & Communication -->
+            <div class="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-emerald-500/40 transition duration-300 card-glow flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <span class="h-12 w-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl">
+                            <i class="fas fa-globe-asia"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-lg font-bold text-white leading-tight">Policy & Strategy</h3>
+                            <span class="text-[9px] uppercase tracking-widest text-slate-500 font-mono font-bold block mt-0.5">Governance layer [GOV-03]</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <!-- Policy Skill 1 -->
+                        <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800 hover:border-emerald-500/30 transition duration-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-xs font-semibold text-slate-200">Federal Policy Audit</span>
+                                <span class="px-1.5 py-0.5 rounded bg-emerald-500/10 text-[9px] font-mono text-emerald-400 font-bold">ENFORCED</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Analyzed fertilizer consumption metrics and evaluated municipal implementation patterns of Street Hawker Acts.</p>
+                        </div>
+
+                        <!-- Policy Skill 2 -->
+                        <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800 hover:border-emerald-500/30 transition duration-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-xs font-semibold text-slate-200">Stakeholder Management</span>
+                                <span class="px-1.5 py-0.5 rounded bg-indigo-500/10 text-[9px] font-mono text-indigo-400 font-bold">STEERED</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Interfaced directly with government agencies, public representatives, and global pharma structures on SLA targets.</p>
+                        </div>
+
+                        <!-- Policy Skill 3 -->
+                        <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800 hover:border-emerald-500/30 transition duration-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-xs font-semibold text-slate-200">Constituency Mapping</span>
+                                <span class="px-1.5 py-0.5 rounded bg-orange-500/10 text-[9px] font-mono text-brand-saffron font-bold">ALIGNED</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Drafted 15+ Parliamentary legislative inquiries linking key localized regional parameters to federal strategy loops.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 pt-4 border-t border-slate-800/80">
+                    <span class="text-[9px] uppercase tracking-widest text-slate-500 font-bold block mb-1.5 font-mono">Languages Spoken</span>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="px-2 py-0.5 bg-slate-950 border border-slate-800 rounded text-[9px] font-bold text-brand-saffron uppercase">Tamil</span>
+                        <span class="px-2 py-0.5 bg-slate-950 border border-slate-800 rounded text-[9px] font-bold text-emerald-400 uppercase">English</span>
+                        <span class="px-2 py-0.5 bg-slate-950 border border-slate-800 rounded text-[9px] font-bold text-indigo-400 uppercase">Malayalam</span>
+                        <span class="px-2 py-0.5 bg-slate-950 border border-slate-800 rounded text-[9px] font-bold text-slate-300 uppercase">Hindi</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="education" class="py-20 lg:py-28 bg-slate-900/30 border-t border-slate-900 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-16">
+            <span class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-indigo-400 bg-indigo-500/10 rounded-full">Academic Base</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">Education & Credentials</h2>
+            <div class="h-1 w-20 bg-brand-saffron mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
+            
+            <!-- Left: Premium styled Degree Certificate with Campus Background (image_00d92a.jpg) -->
+            <div class="relative overflow-hidden rounded-3xl min-h-[380px] flex flex-col justify-between p-6 sm:p-8 shadow-2xl border border-slate-800/60 group" style="background-image: url('https://srec.ac.in/themes/frontend/images/about/management-01-1.jpg'); background-size: cover; background-position: center;">
+                <!-- Dark gradient overlay for extreme legibility of text content -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/10 z-0"></div>
+                
+                <!-- Top Badge Row showing physically separated cap icon and narrowed, tight score bubble (image_f3941c.png) -->
+                <div class="relative z-10 flex justify-end items-center space-x-2 w-full">
+                    <!-- Separate Orange Graduation Cap Icon - Fixed Dimensions -->
+                    <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-brand-saffron to-amber-500 text-white flex items-center justify-center text-xl shadow-lg shadow-orange-500/35 transform group-hover:scale-110 transition duration-300 flex-shrink-0">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>                                       
+                    <!-- Separate Narrow CGPA Score Pill - Border narrowed to size of text equivalent -->
+                    <div class="bg-[#0B132B]/100 backdrop-blur-md border border-slate-800/80 py-1 px-2.5 rounded-lg text-[11px] shadow-xl flex items-center justify-center h-8">
+                        <span class="text-slate-100">Score: <strong class="text-white">CGPA 8.03</strong></span>
+                    </div>
+                </div>
+
+                <!-- Bottom Typography Content matching image_00d92a.jpg exactly -->
+                <div class="relative z-10 mt-auto space-y-3">
+                    <div class="h-20 w-20 bg-white border border-slate-800 rounded-xl flex items-center justify-center p-2 shadow-md flex-shrink-0">
+                        <img src="https://www.srec.ecoe.in//assets/images/srec_logo.JPG" class="max-h-full max-w-full object-contain" alt="SREC Logo">
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-bold text-brand-saffron font-classic tracking-wide leading-tight">
+                        Bachelor of Engineering in Biomedical Engineering
+                    </h3>
+                    <p class="text-white text-sm sm:text-base font-semibold">
+                        Sri Ramakrishna Engineering College, Coimbatore
+                    </p>
+                    <p class="text-slate-300 text-xs sm:text-sm font-medium">
+                        July 2019 - May 2023 | Accredited to Anna University, Chennai
+                    </p>
+                    <!-- Core details sub-row -->
+                    <div class="pt-2 border-t border-slate-800/40 text-[10px] text-slate-400 flex flex-wrap gap-2">
+                        <span class="bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded border border-slate-800/40">Problem Solving</span>
+                        <span class="bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded border border-slate-800/40">Medical Data Analysis</span>
+                        <span class="bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded border border-slate-800/40">Instrumentation</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Interactive Certificate Showcase with badging -->
+            <div class="p-6 sm:p-8 rounded-2xl bg-slate-900 border border-slate-800 relative overflow-hidden flex flex-col justify-between group shadow-xl">
+                <div class="absolute -right-16 -top-16 h-36 w-36 bg-brand-saffron/10 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-500"></div>
+
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <!-- Validated Credentials Label - Increased size to be 2x larger than standard text size -->
+                        <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-indigo-400 bg-indigo-500/10 rounded-full">Validated Credentials</span>
+                                               
+                        <!-- Circular Medal Ribbon/Award Icon - Scale and dimensions updated to be 2x larger (image_f3971f.png) -->
+                        <span class="text-slate-300 text-2xl sm:text-3xl filter drop-shadow-[0_0_8px_rgba(79,70,229,0.35)] transition-transform duration-300 group-hover:scale-110" title="Verified Certification Badge">
+                            <i class="fas fa-award"></i>
+                        </span>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <h3 class="text-xl sm:text-2xl font-bold text-white font-classic leading-snug">Industry & Domain Certifications</h3>
+                        <p class="text-slate-400 text-xs sm:text-sm">Click "See Certificate" to view the verified credential register.</p>
+                    </div>
+
+                    <!-- Scrollable list of cert cards with actual logos and See Certificate buttons -->
+                    <div class="space-y-3 max-h-[260px] overflow-y-auto pr-2">
+                        <!-- Cert 1 (IBM Product Manager) -->
+                        <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-brand-saffron/40 transition duration-300">
+                            <div class="flex items-start space-x-3">
+                                <!-- IBM Official logo -->
+                                <div class="h-10 w-10 flex-shrink-0 bg-white rounded-lg flex items-center justify-center p-1">
+                                    <img src="https://static.vecteezy.com/system/resources/previews/021/514/722/non_2x/ibm-brand-symbol-software-computer-logo-design-illustration-free-vector.jpg" class="max-h-full max-w-full object-contain" alt="IBM Logo">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-xs leading-tight">IBM Product Manager Professional Certificate</h4>
+                                    <p class="text-[10px] text-slate-500 mt-1">IBM via Coursera | Cred ID: <span class="font-mono text-slate-300">QPUCE9JDMQLE</span></p>
+                                    <span class="inline-block mt-1 text-[10px] text-brand-saffron font-semibold">Issued Jun 2026</span>
+                                </div>
+                            </div>
+                            <!-- See Certificate CTA -->
+                            <a href="https://www.coursera.org/account/accomplishments/professional-cert/certificate/QPUCE9JDMQLE" target="_blank" class="w-full sm:w-auto text-center px-3 py-1.5 rounded bg-brand-saffron/10 hover:bg-brand-saffron hover:text-white border border-brand-saffron/30 text-brand-saffron text-xs font-semibold transition duration-200 whitespace-nowrap flex items-center justify-center space-x-1">
+                                <span>See Certificate</span>
+                                <i class="fas fa-external-link-alt text-[9px]"></i>
+                            </a>
+                        </div>
+
+                        <!-- Cert 2 (Machine Learning with Python) -->
+                        <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-indigo-500/40 transition duration-300">
+                            <div class="flex items-start space-x-3">
+                                <!-- Python Logo -->
+                                <div class="h-10 w-10 flex-shrink-0 bg-white/5 rounded-lg flex items-center justify-center p-1.5">
+                                    <img src="https://images.icon-icons.com/2699/PNG/512/python_logo_icon_168886.png" class="max-h-full max-w-full object-contain" alt="Python Logo">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-xs leading-tight">Machine Learning with Python</h4>
+                                    <p class="text-[10px] text-slate-500 mt-1">IBM via Coursera | Cred ID: <span class="font-mono text-slate-300">5MC77EC2EZD5</span></p>
+                                    <span class="inline-block mt-1 text-[10px] text-brand-saffron font-semibold">Issued Jan 2026</span>
+                                </div>
+                            </div>
+                            <!-- See Certificate CTA -->
+                            <a href="https://www.coursera.org/account/accomplishments/certificate/5MC77EC2EZD5" target="_blank" class="w-full sm:w-auto text-center px-3 py-1.5 rounded bg-brand-indigo/10 hover:bg-brand-indigo hover:text-white border border-brand-indigo/30 text-indigo-400 text-xs font-semibold transition duration-200 whitespace-nowrap flex items-center justify-center space-x-1">
+                                <span>See Certificate</span>
+                                <i class="fas fa-external-link-alt text-[9px]"></i>
+                            </a>
+                        </div>
+
+                        <!-- Cert 3 (Macroeconomics Principles) -->
+                        <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-indigo-500/40 transition duration-300">
+                            <div class="flex items-start space-x-3">
+                                <!-- MRU Logo -->
+                                <div class="h-10 w-10 flex-shrink-0 bg-white/5 rounded-lg flex items-center justify-center p-1.5">
+                                    <img src="https://yt3.googleusercontent.com/ytc/AIdro_nnXqVdmtQ-KPlsXDU5VrOxKE3wi4nryCPYuKbNfwOfDik=s900-c-k-c0x00ffffff-no-rj" class="max-h-full max-w-full object-contain" alt="MRU Logo">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-xs leading-tight">Macroeconomics Principles</h4>
+                                    <p class="text-[10px] text-slate-500 mt-1">Marginal Revolution University (MRU), Virginia</p>
+                                    <span class="inline-block mt-1 text-[10px] text-brand-saffron font-semibold">Issued Aug 2025</span>
+                                </div>
+                            </div>
+                            <!-- See Certificate CTA -->
+                            <a href="https://github.com/abinesh007/rl.abinesh.github.io/blob/main/MRUniversity%20Certificate.pdf" target="_blank" class="w-full sm:w-auto text-center px-3 py-1.5 rounded bg-emerald-500/10 hover:bg-emerald-500 hover:text-white border border-emerald-500/30 text-emerald-400 text-xs font-semibold transition duration-200 whitespace-nowrap flex items-center justify-center space-x-1">
+                                <span>See Certificate</span>
+                                <i class="fas fa-external-link-alt text-[9px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-slate-800/80 pt-4 mt-4 text-[10px] text-slate-500 text-center">
+                    All licenses registered and verifiable on official university or platform registrar records.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="py-20 lg:py-28 bg-slate-950 border-t border-slate-900 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+        <div class="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 text-center space-y-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute -left-10 -bottom-10 h-32 w-32 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="space-y-2">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Contact Me</h2>
+                <p class="text-slate-400 text-sm max-w-lg mx-auto">Feel free to connect or copy details for professional alignments and product strategy opportunities.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto text-left">
+                
+                <!-- Email Option -->
+                <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-between space-x-4 hover:border-indigo-500/30 transition min-w-0 overflow-hidden">
+                    <div class="flex items-center space-x-3.5 min-w-0 flex-1">
+                        <span class="h-11 w-11 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="far fa-envelope"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block">Email Address</span>
+                            <span class="text-xs sm:text-sm font-bold text-white truncate block select-all" title="abineshrlofficial2001@gmail.com">abineshrlofficial2001@gmail.com</span>
+                        </div>
+                    </div>
+                    <button onclick="copyText('abineshrlofficial2001@gmail.com')" class="text-slate-400 hover:text-brand-saffron p-2 transition flex-shrink-0" aria-label="Copy Email">
+                        <i class="far fa-copy text-sm"></i>
+                    </button>
+                </div>
+
+                <!-- Phone Option -->
+                <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-between space-x-4 hover:border-brand-saffron/30 transition min-w-0 overflow-hidden">
+                    <div class="flex items-center space-x-3.5 min-w-0 flex-1">
+                        <span class="h-11 w-11 rounded-lg bg-orange-500/10 text-brand-saffron flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fas fa-mobile-screen-button"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block">Mobile Phone</span>
+                            <span class="text-xs sm:text-sm font-bold text-white flex items-center space-x-1.5 select-all">
+                                <span class="flex items-center space-x-1 flex-shrink-0">
+                                    <span class="text-base select-none">🇮🇳</span>
+                                </span>
+                                <span>+91-63830 31277</span>
+                            </span>
+                        </div>
+                    </div>
+                    <button onclick="copyText('+916383031277')" class="text-slate-400 hover:text-brand-saffron p-2 transition flex-shrink-0" aria-label="Copy Phone">
+                        <i class="far fa-copy text-sm"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Footer Details -->
+            <div class="pt-6 border-t border-slate-800/60 max-w-lg mx-auto">
+                <p class="text-[11px] text-slate-500">Also reach out via LinkedIn for professional networking!</p>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-slate-950 border-t border-slate-900 py-12 text-center text-slate-500 text-xs sm:text-sm">
+    <div class="max-w-7xl mx-auto px-4 space-y-4">
+        <p>&copy; 2026 Abinesh R L. All Rights Reserved.</p>
+    </div>
 </footer>
+
+<!-- SYSTEM DATA & LOGIC CONTROL SCRIPT -->
+<script>
+    /* ==========================================
+       1. PDF LINK CONFIGURATION
+       To support standard device sandbox regulations and prevent forced raw downloading,
+       we render through Google's GView interface, using your GitHub repository source paths.
+       ========================================== */
+    const JAP_RAW_PDF_URL = "https://raw.githubusercontent.com/abinesh007/JanArogyaPusthak-App/main/Jan%20Arogya%20Pusthak%20(JAP)%20-%20A%20Unified%20Digital%20Health%20Ledger%20for%20Indian%20Citizens.pdf";
+    const LRCL_RAW_PDF_URL = "https://raw.githubusercontent.com/abinesh007/Google-Map--Local-Routes-Confidence-Layer-LRCL-/main/PRD%20-%20Google%20Map.pdf";
+
+    // Direct Browser-Friendly Links for the "View External" Action buttons
+    const JAP_EXTERNAL_LINK = "https://github.com/abinesh007/JanArogyaPusthak-App/blob/main/Jan%20Arogya%20Pusthak%20(JAP)%20-%20A%20Unified%20Digital%20Health%20Ledger%20for%20Indian%20Citizens.pdf";
+    const LRCL_EXTERNAL_LINK = "https://github.com/abinesh007/Google-Map--Local-Routes-Confidence-Layer-LRCL-/blob/main/PRD%20-%20Google%20Map.pdf";
+
+    // Build the embedded URL structures for standard scroll iframe rendering
+    const JAP_EMBED_URL = "https://docs.google.com/gview?url=" + encodeURIComponent(JAP_RAW_PDF_URL) + "&embedded=true";
+    const LRCL_EMBED_URL = "https://docs.google.com/gview?url=" + encodeURIComponent(LRCL_RAW_PDF_URL) + "&embedded=true";
+
+    /* ==========================================
+       2. CUSTOM CANVAS DRAW LOOP: DNA DOUBLE HELIX
+       ========================================== */
+    const canvas = document.getElementById('dna-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    let dots = [];
+    let angle = 0;
+    const speed = 0.008;
+    const nodeCount = 32;
+    const helixRadius = 55;
+    
+    function resizeCanvas() {
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+    }
+    
+    // Listen to resize events and dynamically refresh the coordinate scaling
+    window.addEventListener('resize', resizeCanvas);
+    
+    function drawDNA() {
+        const rect = canvas.getBoundingClientRect();
+        ctx.clearRect(0, 0, rect.width, rect.height);
+        
+        const centerX = rect.width / 2;
+        const spacing = rect.height / (nodeCount + 2);
+        
+        for (let i = 0; i < nodeCount; i++) {
+            const y = spacing * (i + 1.5);
+            // Angle shift down the spine
+            const nodeAngle = angle + (i * 0.28);
+            
+            // X coordinate calculation using perspective scale
+            const cosVal = Math.cos(nodeAngle);
+            const sinVal = Math.sin(nodeAngle);
+            
+            const x1 = centerX + sinVal * helixRadius;
+            const x2 = centerX - sinVal * helixRadius;
+            
+            // Calculate perspective size (closer points look bigger)
+            const r1 = 2.5 + cosVal * 1.5;
+            const r2 = 2.5 - cosVal * 1.5;
+            
+            // 1. Draw Connection Link (Base Pair)
+            ctx.beginPath();
+            ctx.moveTo(x1, y);
+            ctx.lineTo(x2, y);
+            ctx.strokeStyle = `rgba(148, 163, 184, ${0.12 + Math.abs(cosVal) * 0.15})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            
+            // 2. Draw Saffron Node (First helix line)
+            ctx.beginPath();
+            ctx.arc(x1, y, Math.max(1, r1), 0, Math.PI * 2);
+            ctx.fillStyle = cosVal > 0 ? '#F97316' : '#FB923C'; // Gradient depth simulation
+            ctx.fill();
+            
+            // 3. Draw Indigo/Slate Node (Second complementary helix line)
+            ctx.beginPath();
+            ctx.arc(x2, y, Math.max(1, r2), 0, Math.PI * 2);
+            ctx.fillStyle = cosVal <= 0 ? '#4F46E5' : '#818CF8';
+            ctx.fill();
+        }
+        
+        angle += speed;
+        requestAnimationFrame(drawDNA);
+    }
+
+    /* ==========================================
+       3. INTERACTIVE SWITCHES AND TABS
+       ========================================== */
+    let activeProject = 'jar';
+
+    function switchProject(projectKey) {
+        activeProject = projectKey;
+        
+        const tabJar = document.getElementById('tab-jar');
+        const tabRoutes = document.getElementById('tab-routes');
+        const prdTitle = document.getElementById('prd-title');
+        
+        const contentJar = document.getElementById('project-jar-content');
+        const contentRoutes = document.getElementById('project-routes-content');
+        
+        const githubLinkBadge = document.getElementById('github-link-badge');
+        const liveDemoBadge = document.getElementById('live-demo-badge');
+
+        const pdfViewer = document.getElementById('pdf-iframe-viewer');
+        const pdfViewTitle = document.getElementById('pdf-view-title');
+        const pdfFallbackLink = document.getElementById('pdf-fallback-link');
+        
+        if (projectKey === 'jar') {
+            // Activate Tab styling
+            tabJar.className = "px-3 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-brand-saffron text-white shadow-md";
+            tabRoutes.className = "px-3 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-white";
+            
+            // Toggle Content Specs
+            contentJar.classList.remove('hidden');
+            contentRoutes.classList.add('hidden');
+            
+            // Update Dynamic Link Targets
+            prdTitle.textContent = "jan-arogya-pusthak-prd.docx";
+            githubLinkBadge.href = "https://github.com/abinesh007/JanArogyaPusthak-App";
+            liveDemoBadge.href = "https://abinesh007.github.io/JanArogyaPusthak-App/";
+            liveDemoBadge.innerHTML = `<i class="fas fa-external-link-alt text-[10px]"></i> <span>Live Web App</span>`;
+            liveDemoBadge.style.display = "inline-flex";
+
+            // Update Embedded PDF Viewer attributes with actual file sources
+            pdfViewer.src = JAP_EMBED_URL;
+            pdfViewTitle.textContent = "PRD: JAP Unified Ledger.pdf";
+            pdfFallbackLink.href = JAP_EXTERNAL_LINK;
+
+        } else if (projectKey === 'routes') {
+            // Activate Tab styling
+            tabRoutes.className = "px-3 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-brand-saffron text-white shadow-md";
+            tabJar.className = "px-3 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-white";
+            
+            // Toggle Content Specs
+            contentRoutes.classList.remove('hidden');
+            contentJar.classList.add('hidden');
+            
+            // Update Dynamic Link Targets
+            prdTitle.textContent = "local-routes-confidence-layer-prd.docx";
+            githubLinkBadge.href = "https://github.com/abinesh007/Google-Map--Local-Routes-Confidence-Layer-LRCL-";
+            liveDemoBadge.href = "https://github.com/abinesh007/Google-Map--Local-Routes-Confidence-Layer-LRCL-#readme";
+            liveDemoBadge.innerHTML = `<i class="fas fa-info-circle text-[10px]"></i> <span>Spec Readme</span>`;
+
+            // Update Embedded PDF Viewer attributes with actual file sources
+            pdfViewer.src = LRCL_EMBED_URL;
+            pdfViewTitle.textContent = "PRD: Map Confidence Layer.pdf";
+            pdfFallbackLink.href = LRCL_EXTERNAL_LINK;
+        }
+    }
+
+    /* ==========================================
+       4. CLIPBOARD CONTROLS & DYNAMIC TOASTS
+       ========================================== */
+    function copyText(value) {
+        const dummy = document.createElement("textarea");
+        document.body.appendChild(dummy);
+        dummy.value = value;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+        
+        showToast("Copied to clipboard: " + value);
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toast-msg');
+        
+        toastMsg.textContent = message;
+        toast.className = "fixed bottom-5 right-5 z-50 bg-slate-900 border-l-4 border-brand-saffron text-white px-5 py-3 rounded-lg shadow-2xl transform translate-y-0 opacity-100 transition-all duration-300 pointer-events-auto flex items-center space-x-3";
+        
+        setTimeout(() => {
+            toast.className = "fixed bottom-5 right-5 z-50 bg-slate-900 border-l-4 border-brand-saffron text-white px-5 py-3 rounded-lg shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center space-x-3";
+        }, 3000);
+    }
+
+    /* ==========================================
+       5. MOBILE NAVIGATION TOGGLES
+       ========================================== */
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+    });
+
+    /* ==========================================
+       6. SYSTEM INITIALIZATION ON MOUNT
+       ========================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+        resizeCanvas();
+        drawDNA();
+        switchProject('jar');
+    });
+</script>
 
 </body>
 </html>
